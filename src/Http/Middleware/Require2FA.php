@@ -19,7 +19,6 @@ class Require2FA
     public function handle($request, Closure $next)
     {
         if (!auth()->user()) {
-            session()->put('intended.url', $request->getRequestUri());
             return redirect()->to(route('login'))->withErrors([
                 'email' => ['Authentication required'],
             ]);
