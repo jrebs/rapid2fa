@@ -18,6 +18,11 @@ class Require2FA
      */
     public function handle($request, Closure $next)
     {
+        if (!auth()->user()) {
+            return redirect()->to(route('login'))->withErrors([
+                'email' => ['Authentication required'],
+            ]);
+        }
         if (!auth()->user()->google2fa_secret) {
             session()->put('intended.url', $request->getRequestUri());
             return redirect()->to(route('rapid2fa.enable'))->with(
