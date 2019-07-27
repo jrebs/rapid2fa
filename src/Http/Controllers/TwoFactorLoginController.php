@@ -7,6 +7,7 @@ use Google2FA;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class TwoFactorLoginController extends LoginController
 {
@@ -54,7 +55,16 @@ class TwoFactorLoginController extends LoginController
     protected function validateTwoFactor(Request $request): bool
     {
         $code = $request->input('rapid2fa');
-        $secret = Crypt::decrypt(auth()->user()->google2fa_secret);
+        try {
+            $secret = Crypt::decrypt(auth()->user()->google2fa_secret);
+        } catch (DecryptException $e) {
+            // Somehow the user has an invalid secret key saved and we will
+            // never be able to recover from this
+            auth()->user()->google2fa_secret = null;
+            auth()->user()->save();
+
+            return false;
+        }
 
         return ($code && Google2FA::verifyKey($secret, $code));
     }
