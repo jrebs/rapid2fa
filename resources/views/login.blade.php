@@ -43,7 +43,7 @@
                             <label for="rapid2fa" class="col-md-4 col-form-label text-md-right">{{ __('Two-Factor Code') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rapid2fa" type="text" class="form-control{{ $errors->has('rapid2fa') ? ' is-invalid' : '' }}" name="rapid2fa" value="" autofocus>
+                                <input id="rapid2fa" type="text" class="form-control{{ $errors->has('rapid2fa') ? ' is-invalid' : '' }}" name="rapid2fa" value="" autocomplete="off" autofocus>
                                 @if ($errors->has('rapid2fa'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('rapid2fa') }}</strong>

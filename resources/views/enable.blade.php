@@ -16,19 +16,26 @@
 
                     <div class="panel-body">
                         <div style="text-align: center;">
-                            <div class="alert alert-success" role="alert">
-                                Scan the QR code using a standard two-factor
-                                auth app such as Google Authenticator:
-                            </div>
-                            <br />
+                            @if ($image)
+                                <div class="alert alert-success" role="alert">
+                                    Scan the QR code using a standard two-factor
+                                    auth app such as Google Authenticator:
+                                </div>
+                                <br />
 
-                            <div>
-                                <img alt="Image of QR barcode" src="{{ $image }}" />
-                            </div>
+                                <div>
+                                    <img alt="Image of QR barcode" src="{{ $image }}" />
+                                </div>
+                            @elseif (app()->isLocal())
+                                <div class="alert alert-danger" role="alert">
+                                    You are probably missing the <b>php-imagick</b> extension.
+                                </div>
+                            @endif
 
                             <div style="text-align: center;">
-                                If you're unable to use QR barcodes, you can
-                                enter the following code into your app:
+                                If you're unable to use QR barcodes or you do
+                                not see one above, you can enter the following
+                                code into your app:<br/>
                                 <code style="color: rgb(122, 9, 9); font-size: 40px;">{{ $secret }}</code>
                             </div>
 

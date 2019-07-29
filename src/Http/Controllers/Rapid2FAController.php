@@ -34,12 +34,15 @@ class Rapid2FAController extends Controller
     {
         $user = $request->user();
         $secret = $this->generateSecret();
-        $imageDataUri = Google2FA::getQRCodeInline(
-            $request->getHttpHost(),
-            $user->email,
-            $secret,
-            200
-        );
+        $imageDataUri = null;
+        if (extension_loaded('imagick')) {
+            $imageDataUri = Google2FA::getQRCodeInline(
+                $request->getHttpHost(),
+                $user->email,
+                $secret,
+                200
+            );
+        }
 
         return view('rapid2fa::enable', [
             'image' => $imageDataUri,
