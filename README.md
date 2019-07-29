@@ -11,7 +11,7 @@ can copy or use as a guide to make your own.
 
 ## Requirements
 * `php >= 7.2`
-* `laravel/framework >=5.8`
+* `laravel/framework >= 5.8`
 * `google2fa-laravel`
 
 This package is intended for use in apps using basic Laravel Auth support
