@@ -1,4 +1,11 @@
 # Rapid2FA Package for Laravel
+
+:exclamation: **This package is no longer maintained. Its functionality
+has been superceded by laravel's jetstream package in newer versions of
+laravel. It will remain up for a while to satisfy a few straggler projects
+that are still depending on it, but expect it to be officially archived
+at some point, probably by or during 2022.**
+
 Wanting to learn how packaging for Laravel works and after integrating
 two-factor authentication for a project at work, I made a little weekend
 project of building this zero-effort two-factor package for apps using
